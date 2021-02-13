@@ -1,38 +1,49 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const helmet = require('helmet');
+const cors = require('cors');
+require('dotenv').config();
+
+
 const market_routes = require("./routes/market");
+
+const PORT = process.env.PORT || 80;
 
 const app = express();
 
 
-// Syn the database ...........
-
-/*
-const {sequelize} = require("./models/index");
-
-sequelize.sync().then(()=>{
-    console.log("\n [+] Successfully connected to database ....\n");
-}).catch(err => {
-    console.log("\n [!] Couldn't connect to database <<<============\n\n" + err + "\n");
-});
-*/
-
-
-// HTTP behavior configuration .........
-
-const http_port = 4444;
-
+app.use(helmet());
+app.use(cors());
 app.use(bodyParser.json());
-app.use(market_routes);
 
+
+//market routes
+app.use('/markets', market_routes);
+
+//404 error
+app.use(async (req, res, next) => {
+  res.status(404).json({
+    success: false,
+    message: "not fount"
+  });
+});
+
+//other errors handler
+app.use((err, req, res) => {
+  res.status(err.status || 500)
+  res.send({
+    error: {
+      status: err.status || 500,
+      message: err.message,
+    }
+  });
+});
 
 
 // CONNECTING TO HTTP SERVER .........
 
-app.listen(http_port, () => {
-    console.log("\n [+] HTTP server is listening on port " + http_port + "\n");
-}).on('error', (err) =>{
-    console.log("\n [!] Couldn't connect to http server <<<=================\n\n" + err + "\n");
+app.listen(PORT, () => {
+  console.log("\n [+] HTTP server is listening on port " + PORT + "\n");
 });
 
 

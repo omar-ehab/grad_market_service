@@ -1,7 +1,6 @@
 'use strict';
 const {Model} = require('sequelize');
 
-//const { Sequelize } = require('.');
 module.exports = (sequelize, DataTypes) => {
   
   class Market extends Model {
@@ -16,13 +15,10 @@ module.exports = (sequelize, DataTypes) => {
       await this.save({transaction: t});
     }
 
-  };
-  
-  
-  
+  }
   Market.init({
     id: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.INTEGER.UNSIGNED,
       primaryKey: true,
       autoIncrement: true,
       allowNull: false
@@ -38,7 +34,7 @@ module.exports = (sequelize, DataTypes) => {
       defaultValue: 0
     },
     createdBy: {
-      type: DataTypes.STRING,
+      type: DataTypes.INTEGER.UNSIGNED, //we will store user id not name
       allowNull: false
     }
   }, {

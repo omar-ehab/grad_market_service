@@ -2,33 +2,30 @@ const router = require("express").Router();
 
 const market_controller = require("../controllers/MarketController");
 
-    // CRUD Routes  <=====
+router.get('/', market_controller.index);
 
+// Insert new market ....
 
+router.post('/', market_controller.create);
 
-        // Insert new market ....
-        
-router.post('/insert', market_controller.create);
+// delete market ....
 
-        // delete market ....
+router.delete('/:id/destroy', market_controller.delete_market);
 
-router.delete('/delete/:id', market_controller.delete_market);
+// update market ....
 
-        // update market ....
+router.put('/:id/update', market_controller.update_market);
 
-router.put('/update/:id', market_controller.update_market);
+// select market ....
 
-        // select market ....
+router.get('/:id', market_controller.show_market);
 
-router.get('/select/:id', market_controller.select_market);
+// market withdraw ....
 
-        // market withdraw ....
+router.post('/:id/withdraw', market_controller.withdraw);
 
-router.post('/withdraw/:id', market_controller.withdraw);
-
-        // market deposit ....
-
-router.post('/deposit/:id', market_controller.deposit);
+// market deposit ....
+router.post('/:id/deposit', market_controller.deposit);
 
 
 module.exports = router;
