@@ -2,7 +2,7 @@
   "development": {
     "username": "root",
     "password": null,
-    "database": "market_db",
+    "database": "grad_markets",
     "host": "127.0.0.1",
     "dialect": "mysql",
     "timezone": "+02:00"

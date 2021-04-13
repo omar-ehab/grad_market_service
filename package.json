@@ -9,6 +9,7 @@
   "author": "Wael_Ashraf",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.21.1",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
@@ -16,7 +17,8 @@
     "helmet": "^4.4.1",
     "joi": "^17.3.0",
     "mysql2": "^2.2.5",
-    "sequelize": "^6.4.0"
+    "sequelize": "^6.6.2",
+    "sequelize-cli": "^6.2.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.7"
